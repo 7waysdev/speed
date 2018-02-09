@@ -1,15 +1,19 @@
 {
-  "name": "vtex-speed",
-  "version": "4.0.0",
+  "name": "cobasi",
+  "accountName": "cobasi",
+  "version": "1.0.0",
   "secureUrl": true,
   "readmeFilename": "README.md",
-  "description": "VTEX Store development tools - reverse proxy, compilation, minification, optimization and more!",
+  "description": "VTEX Store development tools - 7Ways fork",
   "scripts": {
     "start": "grunt"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "connect-http-please": "^0.3.0",
     "grunt": "~1.0.1",
+    "grunt-babel": "^7.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-coffee": "^1.0.0",
     "grunt-contrib-concat": "^1.0.1",
@@ -36,5 +40,8 @@
     "livereload",
     "vtex"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.23.0"
+  }
 }

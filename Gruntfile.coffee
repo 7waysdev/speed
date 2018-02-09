@@ -3,6 +3,7 @@ serveStatic = require('serve-static')
 httpPlease = require('connect-http-please')
 url = require('url')
 middlewares = require('./speed-middleware')
+middlewares7ways = require('./7ways-middleware');
 
 module.exports = (grunt) ->
   pkg = grunt.file.readJSON('package.json')
@@ -46,6 +47,15 @@ module.exports = (grunt) ->
           dest: "build/"
         ]
 
+    babel: 
+      options: 
+        sourceMap: true,
+        presets: ['env']
+      dist:
+        files: [
+          'build/main.js' : ["src/modules/**/*.js"]
+        ]
+
     coffee:
       main:
         files: [
@@ -81,7 +91,7 @@ module.exports = (grunt) ->
         files: [{
           expand: true
           cwd: 'build/'
-          src: ['*.js', '!*.min.js']
+          src: ['main.js']
           dest: 'build/'
           ext: '.min.js'
         }]
@@ -112,6 +122,7 @@ module.exports = (grunt) ->
             middlewares.rewriteLocationHeader(rewriteLocation)
             middlewares.replaceHost(portalHost)
             middlewares.replaceHtmlBody(environment, accountName, secureUrl)
+            middlewares7ways.localHtml()
             httpPlease(host: portalHost, verbose: verbose)
             serveStatic('./build')
             proxy(imgProxyOptions)
@@ -143,7 +154,7 @@ module.exports = (grunt) ->
 
   tasks =
     # Building block tasks
-    build: ['clean', 'copy:main', 'sprite', 'coffee', 'less', 'imagemin']
+    build: ['clean', 'copy:main', 'sprite', 'babel', 'less', 'imagemin', 'uglify']
     min: ['uglify', 'cssmin'] # minifies files
     # Deploy tasks
     dist: ['build', 'min'] # Dist - minifies files

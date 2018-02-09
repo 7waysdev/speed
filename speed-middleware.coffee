@@ -28,8 +28,8 @@ replaceHtmlBody = (environment, accountName, secureUrl) -> (req, res, next) ->
     if data
       data = data.replace(new RegExp(environment, "g"), "vtexlocal")
       data = data.replace(new RegExp("vteximg", "g"), "vtexlocal")
-      if secureUrl
-        data = data.replace(new RegExp("https:\/\/"+accountName, "g"), "http://"+accountName)
+    if secureUrl
+      data = data.replace(new RegExp("https:\/\/"+accountName, "g"), "http://"+accountName)
 
     # Restore res properties
     res.write = write
@@ -53,8 +53,10 @@ disableCompression = (req, res, next) ->
 rewriteLocationHeader = (rewriteFn) -> (req, res, next) ->
   writeHead = res.writeHead
   res.writeHead = (statusCode, headers) ->
+
     if headers and headers.location
       headers.location = rewriteFn(headers.location)
+
     res.writeHead = writeHead
     res.writeHead(statusCode, headers)
   next()
