@@ -21,7 +21,7 @@ module.exports = (grunt) ->
   else 
     imgProxyOptions = url.parse("http://#{accountName}.vteximg.com.br/arquivos")
 
-  imgProxyOptions.route = '/arquivos'
+  imgProxyOptions.route = '/files'
 
   # portalHost is also used by connect-http-please
   # example: basedevmkp.vtexcommercestable.com.br
