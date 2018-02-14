@@ -1,3 +1,9 @@
+# Framework VTEX 7ways
+
+## Estrutura
+* pages - contém todos os scripts das paginas
+* modules - modulos auxiliares
+
 # VTEX Speed
 
 VTEX Store development tools - reverse proxy, compilation, minification, optimization and more!

@@ -6,7 +6,8 @@
   "readmeFilename": "README.md",
   "description": "VTEX Store development tools - 7Ways fork",
   "scripts": {
-    "start": "grunt"
+    "local": "export BUILDLOCAL=true; grunt",
+    "remote": "export BUILDLOCAL=false; grunt"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -25,9 +26,11 @@
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "~1.0.0",
     "grunt-spritesmith": "^6.3.1",
+    "grunt-webpack": "^3.0.2",
     "jpegtran-bin": "^3.0.4",
     "proxy-middleware": "^0.15.0",
-    "serve-static": "^1.10.0"
+    "serve-static": "^1.10.0",
+    "webpack": "^3.11.0"
   },
   "repository": {
     "type": "git",
@@ -42,6 +45,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "babel": "^6.23.0"
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "cheerio": "^1.0.0-rc.2",
+    "require-all": "^2.2.0",
+    "require-context": "^1.0.4"
   }
 }

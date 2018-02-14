@@ -4,6 +4,8 @@ httpPlease = require('connect-http-please')
 url = require('url')
 middlewares = require('./speed-middleware')
 middlewares7ways = require('./7ways-middleware');
+path = require('path');
+webpackConfig = require('./webpack.config');
 
 module.exports = (grunt) ->
   pkg = grunt.file.readJSON('package.json')
@@ -36,16 +38,32 @@ module.exports = (grunt) ->
 
   config =
     clean:
-      main: ['build']
+      main: ['build','build/modules/**']
 
     copy:
       main:
         files: [
           expand: true
           cwd: 'src/'
-          src: ['**', '!**/*.coffee', '!**/*.less', '!sprite/**/*']
-          dest: "build/"
+          src: ['**', '!**/*.coffee', '!**/*.less', '!sprite/**/*', "!modules/**/*", "!main.js"]
+          dest: "build/arquivos"
         ]
+
+    webpack:          
+      build: 
+        target: 'node'
+        entry: ['./src/main.js']
+        output:
+          path: path.resolve(__dirname, "build/arquivos")
+          filename: 'main.js'
+        module:
+          loaders: [
+            test: /\.js?$/,
+            exclude: path.resolve(__dirname, "node_modules")
+            loader: "babel-loader",
+            query: 
+              presets:['es2015', 'react']
+          ]
 
     babel: 
       options: 
@@ -53,7 +71,14 @@ module.exports = (grunt) ->
         presets: ['env']
       dist:
         files: [
-          'build/main.js' : ["src/modules/**/*.js"]
+          expand: true
+          cwd: 'src/'
+          src: ['modules/**/*.js']
+          dest: "build/arquivos",
+          expand: true
+          cwd: 'src/'
+          src: ['main.js']
+          dest: "build/arquivos/main.js"
         ]
 
     coffee:
@@ -72,7 +97,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: 'src/'
           src: ['**/*.less']
-          dest: "build/"
+          dest: "build/arquivos"
           ext: '.css'
         ]
 
@@ -88,19 +113,19 @@ module.exports = (grunt) ->
       options:
         mangle: false
       main:
-        files: [{
+        files: [
           expand: true
-          cwd: 'build/'
+          cwd: 'build/arquivos'
           src: ['main.js']
-          dest: 'build/'
+          dest: 'build/arquivos'
           ext: '.min.js'
-        }]
+        ]
 
     sprite:
       all: 
         src: 'src/sprite/*.png'
         dest: 'build/spritesheet.png'
-        destCss: 'build/sprite.css'
+        destCss: 'build/arquivos/sprite.css'
 
     imagemin:
       main:
@@ -121,8 +146,8 @@ module.exports = (grunt) ->
             middlewares.disableCompression
             middlewares.rewriteLocationHeader(rewriteLocation)
             middlewares.replaceHost(portalHost)
+            middlewares7ways.localHtml(secureUrl)
             middlewares.replaceHtmlBody(environment, accountName, secureUrl)
-            middlewares7ways.localHtml()
             httpPlease(host: portalHost, verbose: verbose)
             serveStatic('./build')
             proxy(imgProxyOptions)
@@ -148,13 +173,15 @@ module.exports = (grunt) ->
         files: ['build/**/*.css']
       main:
         files: ['src/**/*.html', 'src/**/*.js', 'src/**/*.css']
-        tasks: ['copy']
+        tasks: ['build']
+
       grunt:
         files: ['Gruntfile.coffee']
+        tasks: ['build']
 
   tasks =
     # Building block tasks
-    build: ['clean', 'copy:main', 'sprite', 'babel', 'less', 'imagemin', 'uglify']
+    build: ['clean', 'copy:main', 'sprite', 'webpack', 'less', 'imagemin', 'uglify']
     min: ['uglify', 'cssmin'] # minifies files
     # Deploy tasks
     dist: ['build', 'min'] # Dist - minifies files

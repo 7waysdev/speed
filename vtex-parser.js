@@ -1,3 +1,4 @@
+var fs = require('fs')
 var replaceArray = [
     {
         regex: /<\s*vtex:contentPlaceHolder.*?>/g,
@@ -34,8 +35,50 @@ var replaceArray = [
     }
 ]
 
-
-
 module.exports = {
 
+    parseSubTemplates : function(data) {
+
+        let newData = data.replace(/<\s*vtex:template.*?>/g,function(match){
+
+            let rep = match.replace(`<vtex:template id="`,``);
+            rep = rep.replace(`" />`,``);
+            let html = '';
+            
+            try {
+                let fileContent = fs.readFileSync(`src/sub-templates/${rep}.html`);
+                html = fileContent.toString();
+            } catch(err){
+                html = '';
+                return html;
+            }
+
+            return html;
+        });
+
+        return newData;
+    },
+
+    parsePlaceholders : function(data){
+       
+        let newData = data.replace(/<\s*vtex:contentPlaceHolder.*?>/g,function(match){
+            let rep = match.replace(`<vtex:contentPlaceHolder id="`,``);
+            rep = rep.replace(`" />`,``);
+
+            let html = '';
+
+            try {
+                let fileContent = fs.readFileSync(`src/placeholders/${rep}.html`);
+                html = fileContent.toString();
+            } catch(err){
+                html = '';
+                return html;
+            }
+
+            return html;
+        });
+
+        return newData;
+    }
+    
 }
