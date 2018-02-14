@@ -52,6 +52,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
+    "fetch": "^1.1.0",
     "require-all": "^2.2.0",
     "require-context": "^1.0.4"
   }

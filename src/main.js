@@ -1,3 +1,3 @@
-require('./pages/base/base');
-require('./pages/home/home');
-require('./pages/product/product');
+require('./pages/base-page/base-page');
+require('./pages/home-page/home-page');
+require('./pages/product-page/product-page');

@@ -1,4 +1,4 @@
-export class BaseModule {
+export class BasePage {
 
     constructor(name){
         this.name = name;
