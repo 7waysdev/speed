@@ -1,1 +1,177 @@
-<h1>FABIO DO HENTAI</h1>
+<body itemscope="" itemtype="http://schema.org/PetStore">	
+	<!-- Rich Snippets -->
+	<vtex.cmc:productRichSnippets showGoogle="1" />
+
+	<!-- start header -->
+	<!--<vtex:template id="7w-header" />-->
+	
+	<vtex:template id="header" />
+	<!-- end header -->
+	
+	<!-- start main -->
+	<main>
+		
+		<section id="bread-crumb">
+			<div class="container">
+				<vtex.cmc:breadCrumb />
+			</div>
+		</section>
+		
+		<section id="produto">
+			<div class="container">
+				<div class="produto-img">
+					<div class="flag">
+						<vtex.cmc:HightLight/>
+					</div>
+					<vtex.cmc:ProductImage zoom="on"/>
+					<p class="flag-imagem-ilustrativa">Imagens meramente ilustrativas</p>
+				</div>
+				
+				<div class="produto-infos">
+					<div class="box-esquerda">
+						<!-- Nome -->
+						<h1><vtex.cmc:productName/></h1>
+					
+						<div class="produto-infos-left">
+							<div class="cod-referencia">
+								<span class="cod">Ref.:</span>
+								<vtex.cmc:productReference/>
+								<vtex.cmc:brandName/>
+							</div>
+							
+							<div class="descricao-curta">
+							<h2 style="font-weight: 400;">
+								<vtex.cmc:productDescriptionShort />
+							</h2>	
+							</div>
+						</div>
+						<!-- Marca -->
+						<a href="#descricao">
+							<p style="font-weight: 500;text-decoration: underline;color: #00529c;">Ver mais características &#187;</p>
+						</a>
+
+						<!-- Produto em outras cores -->
+						<div class="prodsSimilares">
+							<vtex:contentPlaceHolder id="Similares" />
+						</div>
+
+						<div class="produto-infos-social">
+							<p>Compartilhe: </p>
+							
+							<div class="addthis_inline_share_toolbox"></div>
+						</div>
+					</div>
+
+					<div class="box-direita">
+						<div class="frete">
+							<p>
+								<span>Frete Grátis*</span>
+							</p>
+							<p style="font-size:13px;font-weight:700;text-decoration:none;cursor:auto;text-decoration:none;" >
+								*Consulte condições, 
+								<span style="font-size: 13px; font-weight: 700; text-decoration: underline; cursor: pointer;">clicando aqui.</span></p>
+						</div>
+
+						<!-- Botao Recorrencia -->
+						<div class="produto-infos-right">
+							<a href="javascript:;">
+								<img src="/arquivos/icon-recorrencia.png" alt="Plano de Assinatura" title="Plano de Assinatura" />
+								<p><span>Plano de Assinatura</span></p>
+								<p>Receba este produto frequentemente</p>
+							</a>
+						</div>
+
+						<div class="produto-infos-variacoes">						
+							<p>Escolha o tamanho</p>
+							<vtex.cmc:skuRichSelection changeImage="1" />
+							<!---sem juros foi retirado via js 7w-novo-produto.js-->
+						</div>
+
+						<!--
+						<div class="btn-adicionar-carrinho"></div>
+						<a class="btn-comprar">Comprar</a>
+						-->
+						<div class="botaoComprar">
+						    <a href="javascript:;">Comprar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="conteudo-produto">
+			<div class="container">
+				<section id="descricao">
+					<h2>Descrição do Produto</h2>
+					<vtex.cmc:ProductDescription/>
+				</section>
+
+				<section id="compre-junto">
+					<vtex.cmc:BuyTogether/>
+				</section>
+			</div>
+		</section>
+
+		<section id="avaliacoes">
+			<div class="container">
+				<!-- Avaliações dos consumidores (estrelas) -->
+				<vtex.cmc:evaluationRate/>
+				<vtex.cmc:UserReview/>
+			</div>
+		</section>
+		
+		<section id="vitrine-produtos">
+			<div class="container">
+				<div class="vitrine-produtos-relacionados">
+					<vtex:contentPlaceHolder id="produtos-relacionados" />
+				</div>
+				
+				<div class="vitrine-produtos-qvvt">
+					<vtex:contentPlaceHolder id="produtos-qvvt" />
+				</div>	
+			</div>
+		</section>
+		
+	</main>
+	<!-- end main -->
+	
+	<!-- start modal -->
+	<vtex:template id="modal-boxes" />
+	<!-- end modal -->
+
+	<!-- modal plano de assinatura -->
+	<div class="modal modal-dialog" id="planoAssinatura" style="display: none;">
+		<div class="modal-content" style="">
+			<div class="modal-header">
+				<p>Como funciona o <span>Plano de Assinaturas?</span></p>
+			</div>
+
+			<div class="modal-body">
+				<img src="/arquivos/plano-de-assinaturas.jpg" alt="Plano de Assinatura" title="Plano de Assinatura" />
+				<p>O Plano de Assinaturas é uma nova funcionalidade do site da Cobasi para facilitar a compra de produtos que você adquire com frequência conosco.</p>
+				<p>Dessa maneira você vai receber o produto recorrentemente onde quiser e na frequência que você achar melhor.</p>
+				<img src="/arquivos/animado-processo-escolha.gif" alt="Processo Escolha" title="Processo Escolha" />
+				<a href="/institucional/plano-de-assinatura"><p>saiba mais</p></a>
+			</div>
+
+			<div class="modal-footer">
+				<img src="/arquivos/fechar-modal-plano-assinaturas.png" class="bt-modal-fechar" />
+			</div>
+		</div>
+	</div>
+	<!--end modal plano de assinatura -->
+	
+	<!-- start footer -->
+	<vtex:template id="footer" />
+	<!-- end footer -->
+	
+	<!-- Scripts -->
+	<script type="text/javascript" src="/arquivos/minicart-teste.js?v=201801231007"></script>
+	<script type="text/javascript" src="/arquivos/7w-novo-produto-teste.js?v=201801261410"></script>
+	<script type="text/javascript" src="/arquivos/buytogether.js?v=201801021455000"></script>
+
+	<!--- start addThis -->
+	<script type="text/javascript" async="true">var addthis_share = {url: location.origin + location.pathname, title: this.document.title, media: skuJson_0.skus[0].image};</script>
+	<script type="text/javascript" async="true" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-586e2a13424261ca"></script>
+	<!--- End addThis -->
+</body>

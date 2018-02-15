@@ -25,6 +25,14 @@ var localFilesMap = [{
 
 module.exports = {
 
+    disableCache: function(){
+
+        return function(req,res,next){
+            req.headers['Cache-Control'] = 'no-cache'
+            next();
+        }
+        
+    },
     localHtml : function (secureUrl) {
 
         return (req,res,next) => {
@@ -67,18 +75,22 @@ module.exports = {
 
                         if(hasClass) {
                             
-                            let fileContent = fs.readFileSync(`src/templates/${localFilesMap[i].local}`);
-                            let html = fileContent.toString();
+                            try {
+                                let fileContent = fs.readFileSync(`src/templates/${localFilesMap[i].local}`);
+                                let html = fileContent.toString();
 
-                            html= html.replace(/<\s*vtex.cmc.*?>/g,'');
-                            html= html.replace(/<\s*vtex:metaTags.*?>/g,'');
-                         
-                            let newData = parser.parseSubTemplates(html);
-                            newData = parser.parsePlaceholders(newData);
-                         
-                            $ = cheerio.load(data);
-                            $('body').html(newData);
-                            data =  $.html();
+                                html= html.replace(/<\s*vtex:metaTags.*?>/g,'');
+                                
+                                let newData = parser.parseVtexCmc(html);
+                                newData = parser.parseSubTemplates(newData);
+                                newData = parser.parsePlaceholders(newData);
+                                
+                                $ = cheerio.load(data);
+                                $('body').html(newData);
+                                data =  $.html();
+                            } catch(err) {
+                                console.warn(`No template found (${localFilesMap[i].local}), using remote.`);
+                            }
                         }
                     }
 

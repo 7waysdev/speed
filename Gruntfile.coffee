@@ -164,7 +164,7 @@ module.exports = (grunt) ->
       less:
         options:
           livereload: false
-        files: ['src/**/*.less']
+        files: ['src/**/*.less', 'src/**/**/*.less']
         tasks: ['less']
       images:
         files: ['src/**/*.{png,jpg,gif}']
