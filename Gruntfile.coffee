@@ -18,6 +18,8 @@ module.exports = (grunt) ->
 
   verbose = grunt.option('verbose')
 
+  local = process.env.BUILDLOCAL
+
   if secureUrl
     imgProxyOptions = url.parse("https://#{accountName}.vteximg.com.br/arquivos")
   else 
@@ -145,9 +147,10 @@ module.exports = (grunt) ->
           middleware: [
             middlewares.disableCompression
             middlewares.rewriteLocationHeader(rewriteLocation)
-            middlewares.replaceHost(portalHost)
-            middlewares7ways.localHtml(secureUrl)
+            middlewares.replaceHost(portalHost) 
+            middlewares7ways.localHtml(secureUrl,local)
             middlewares.replaceHtmlBody(environment, accountName, secureUrl)
+          
             httpPlease(host: portalHost, verbose: verbose)
             serveStatic('./build')
             proxy(imgProxyOptions)

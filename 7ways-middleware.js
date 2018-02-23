@@ -33,9 +33,13 @@ module.exports = {
         }
         
     },
-    localHtml : function (secureUrl) {
+    localHtml : function (secureUrl,local) {
 
         return (req,res,next) => {
+            
+            if(local=='false'){
+                return next();
+            }
 
           //  let result = req.url.test(ignoreReplace)
 

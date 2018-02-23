@@ -11,8 +11,11 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
     "babel-preset-env": "^1.6.1",
     "connect-http-please": "^0.3.0",
+    "eslint-config-airbnb-es5": "^1.2.0",
+    "eslint-plugin-react": "^7.6.1",
     "grunt": "~1.0.1",
     "grunt-babel": "^7.0.0",
     "grunt-contrib-clean": "^1.0.0",
