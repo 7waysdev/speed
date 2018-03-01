@@ -1,11 +1,9 @@
 import { BasePage } from '../base-page/base-page'
-import { Product } from '../../modules'
+import { Product } from '../../modules/product'
 
 export class HomePage extends BasePage {
 
     init(){
-        console.log('works ');
-
         let product = new Product();
 
         product.getProductById(3293970).then(function(res){
