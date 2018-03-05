@@ -1,3 +1,3 @@
-export * from "./base-page"
-export * from "./home-page"
-export * from "./product-page"
+export * from "./base"
+export * from "./home"
+export * from "./product"

@@ -1,4 +1,4 @@
-import { BasePage } from '../base-page/base-page'
+import { BasePage } from '../base';
 
 class ProductPage extends BasePage {
 
